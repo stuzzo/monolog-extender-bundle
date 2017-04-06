@@ -1,0 +1,23 @@
+{
+    "name": "stuzzo/monolog-extender-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony MonologExtenderBundle",
+    "keywords": ["log", "logging"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alfredo Aiello",
+            "email": "stuzzo@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "stuzzo/monolog-extender": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.5"
+    },
+    "autoload": {
+        "psr-4": { "Stuzzo\\Bundle\\MonologExtenderBundle\\": "" }
+    }
+}

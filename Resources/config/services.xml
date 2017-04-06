@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Processor -->
+        <service id="app.logger.processor.web" class="Stuzzo\Monolog\Processor\ExtendedWebProcessor">
+            <tag name="monolog.processor" channel="request"/>
+        </service>
+
+        <!-- Formatter -->
+        <service id="app.logger.stream.formatter" class="Stuzzo\Monolog\Formatter\StreamFormatter" public="false">
+            <argument>"[%%datetime%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%\n"</argument>
+            <argument>d/m/Y H:i:s</argument>
+            <argument>true</argument>
+            <argument>true</argument>
+        </service>
+
+        <service id="app.logger.html.formatter" class="Stuzzo\Monolog\Formatter\ExtendedHtmlFormatter" public="false">
+            <argument>d/m/Y H:i:s</argument>
+        </service>
+
+        <service id="app.logger.slack.formatter" class="Stuzzo\Monolog\Formatter\SlackFormatter" public="false">
+            <argument>%%message%%</argument>
+            <argument>d/m/Y H:i:s</argument>
+            <argument>true</argument>
+            <argument>true</argument>
+            <call method="setEnvironment">
+                <argument>%kernel.environment%</argument>
+            </call>
+        </service>
+    </services>
+</container>
