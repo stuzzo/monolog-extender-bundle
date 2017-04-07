@@ -1,7 +1,7 @@
 {
     "name": "stuzzo/monolog-extender-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony MonologExtenderBundle",
+    "description": "Symfony Bundle that wraps Monolog extender library",
     "keywords": ["log", "logging"],
     "license": "MIT",
     "authors": [
