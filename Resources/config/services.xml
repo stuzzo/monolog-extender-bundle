@@ -6,23 +6,23 @@
 
     <services>
         <!-- Processor -->
-        <service id="app.logger.processor.web" class="Stuzzo\Monolog\Processor\ExtendedWebProcessor">
+        <service id="stuzzo.logger.processor.web" class="Stuzzo\Monolog\Processor\ExtendedWebProcessor">
             <tag name="monolog.processor" channel="request"/>
         </service>
 
         <!-- Formatter -->
-        <service id="app.logger.stream.formatter" class="Stuzzo\Monolog\Formatter\StreamFormatter" public="false">
-            <argument>"[%%datetime%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%\n"</argument>
+        <service id="stuzzo.logger.stream.formatter" class="Stuzzo\Monolog\Formatter\StreamFormatter" public="false">
+            <argument>TIME: %%datetime%%\nCHANNEL: %%channel%%\nLEVEL: %%level_name%%\nMESSAGE: %%message%%\n%%context.exception%%\n%%request%%\n</argument>
             <argument>d/m/Y H:i:s</argument>
             <argument>true</argument>
             <argument>true</argument>
         </service>
 
-        <service id="app.logger.html.formatter" class="Stuzzo\Monolog\Formatter\ExtendedHtmlFormatter" public="false">
+        <service id="stuzzo.logger.html.formatter" class="Stuzzo\Monolog\Formatter\ExtendedHtmlFormatter" public="false">
             <argument>d/m/Y H:i:s</argument>
         </service>
 
-        <service id="app.logger.slack.formatter" class="Stuzzo\Monolog\Formatter\SlackFormatter" public="false">
+        <service id="stuzzo.logger.slack.formatter" class="Stuzzo\Monolog\Formatter\SlackFormatter" public="false">
             <argument>%%message%%</argument>
             <argument>d/m/Y H:i:s</argument>
             <argument>true</argument>
