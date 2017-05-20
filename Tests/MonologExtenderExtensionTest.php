@@ -30,6 +30,7 @@ class MonologExtensionTest extends DependencyInjectionTest
         $this->assertTrue($container->hasDefinition('stuzzo.logger.stream.formatter'));
         $this->assertTrue($container->hasDefinition('stuzzo.logger.html.formatter'));
         $this->assertTrue($container->hasDefinition('stuzzo.logger.slack.formatter'));
+        $this->assertTrue($container->hasDefinition('security.token_storage'));
     }
 	
 	protected function getContainer(array $config = array(), array $thirdPartyDefinitions = array())
