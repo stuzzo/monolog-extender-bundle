@@ -10,6 +10,13 @@
             <tag name="monolog.processor" channel="request"/>
         </service>
 
+        <!-- ProcessorWithUserData -->
+        <service id="stuzzo.logger.processor.web.user.data" class="Stuzzo\Monolog\Processor\ExtendedWebUserDataProcessor">
+            <tag name="monolog.processor" channel="request"/>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+            <argument type="service" id="security.token_storage" />
+        </service>
+
         <!-- Formatter -->
         <service id="stuzzo.logger.stream.formatter" class="Stuzzo\Monolog\Formatter\StreamFormatter" public="false">
             <argument>TIME: %%datetime%%\nCHANNEL: %%channel%%\nLEVEL: %%level_name%%\nMESSAGE: %%message%%\n%%context.exception%%\n%%request%%\n</argument>
