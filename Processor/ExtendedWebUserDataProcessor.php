@@ -1,10 +1,11 @@
 <?php
 
-namespace Stuzzo\Monolog\Processor;
+namespace Stuzzo\Bundle\MonologExtenderBundle\Processor;
 
 use AppBundle\Entity\User;
 use Monolog\Processor\WebProcessor;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 /**
@@ -21,7 +22,7 @@ class ExtendedWebUserDataProcessor extends WebProcessor
 	/** @var User  */
 	private $user;
 	
-	public function __construct(TokenStorageInterface $tokenStorage, $serverData = null, $extraFields = null)
+	public function __construct(TokenStorage $tokenStorage, $serverData = null, $extraFields = null)
 	{
 		parent::__construct($serverData, $extraFields);
 		$this->extraFields = array_merge($this->extraFields, [

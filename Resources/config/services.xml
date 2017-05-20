@@ -11,7 +11,7 @@
         </service>
 
         <!-- ProcessorWithUserData -->
-        <service id="stuzzo.logger.processor.web.user.data" class="Stuzzo\Monolog\Processor\ExtendedWebUserDataProcessor">
+        <service id="stuzzo.logger.processor.web.user.data" class="Stuzzo\Bundle\MonologExtenderBundle\Processor\ExtendedWebUserDataProcessor">
             <tag name="monolog.processor" channel="request"/>
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
             <argument type="service" id="security.token_storage" />
