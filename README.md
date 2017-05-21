@@ -7,7 +7,7 @@ library into the Symfony framework.
 Configuration
 =============
 
-This is an example configuration to use mail, slack and stream formatter.
+This is an example configuration to use mail, stream and html formatter.
 
 ```yaml
 monolog:
@@ -43,7 +43,26 @@ monolog:
             channel:        %channel%
             webhook_url:    %hook_url%
             level:          critical
-            formatter:      stuzzo.logger.slack.formatter
+            include_extra:  true
+```
+
+This is an example configuration to use slack and html processors.
+
+```yaml
+services:
+    app.processor.slack:
+        class: Stuzzo\Monolog\Processor\SlackProcessor
+        arguments: ["@security.token_storage"]
+        tags:
+          - { name: monolog.processor, handler: slackwebhook }
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    app.processor.web:
+        class: Stuzzo\Bundle\MonologExtenderBundle\Processor\ExtendedWebUserDataProcessor
+        arguments: ["@security.token_storage"]
+        tags:
+          - { name: monolog.processor, handler: grouped }
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 ```
 
 License
