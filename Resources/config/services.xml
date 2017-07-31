@@ -5,17 +5,21 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <!--&lt;!&ndash; Processor &ndash;&gt;-->
-        <!--<service id="stuzzo.logger.processor.web" class="Stuzzo\Monolog\Processor\ExtendedWebProcessor">-->
-            <!--<tag name="monolog.processor" channel="request"/>-->
-        <!--</service>-->
+        <!-- ProcessorWithUserData -->
+        <service id="stuzzo.logger.processor.web.user.data" class="Stuzzo\Bundle\MonologExtenderBundle\Processor\ExtendedWebUserDataProcessor">
+            <tag name="monolog.processor" channel="request"/>
+            <tag name="monolog.processor" channel="app"/>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+            <argument type="service" id="security.token_storage" />
+        </service>
 
-        <!--&lt;!&ndash; ProcessorWithUserData &ndash;&gt;-->
-        <!--<service id="stuzzo.logger.processor.web.user.data" class="Stuzzo\Bundle\MonologExtenderBundle\Processor\ExtendedWebUserDataProcessor">-->
-            <!--<tag name="monolog.processor" channel="request"/>-->
-            <!--<tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />-->
-            <!--<argument type="service" id="security.token_storage" />-->
-        <!--</service>-->
+        <!-- ProcessorSlackWithUserData -->
+        <service id="stuzzo.logger.processor.slack.user.data" class="Stuzzo\Bundle\MonologExtenderBundle\Processor\SlackProcessor">
+            <tag name="monolog.processor" channel="request"/>
+            <tag name="monolog.processor" channel="app"/>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+            <argument type="service" id="security.token_storage" />
+        </service>
 
         <!-- Formatter -->
         <service id="stuzzo.logger.stream.formatter" class="Stuzzo\Monolog\Formatter\StreamFormatter" public="false">

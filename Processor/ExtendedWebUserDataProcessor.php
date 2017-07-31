@@ -34,7 +34,7 @@ class ExtendedWebUserDataProcessor extends WebProcessor
 	
 	public function __invoke(array $record)
 	{
-		$record = parent::__invoke($record);
+//		$record = parent::__invoke($record);
 		
 		return $this->addRequestData($record);
 	}

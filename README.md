@@ -1,6 +1,9 @@
 MonologExtenderBundle
 =============
 
+[![Total Downloads](https://img.shields.io/packagist/dt/stuzzo/monolog-extender-bundle.svg)](https://packagist.org/packages/stuzzo/monolog-extender-bundle)
+[![Latest Stable Version](https://img.shields.io/packagist/v/stuzzo/monolog-extender-bundle.svg)](https://packagist.org/packages/stuzzo/monolog-extender-bundle)
+
 The `MonologExtenderBundle` provides integration of the [MonologExtender](https://github.com/stuzzo/monolog-bundle)
 library into the Symfony framework.
 
