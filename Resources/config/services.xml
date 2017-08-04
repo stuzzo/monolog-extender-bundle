@@ -6,7 +6,7 @@
 
     <services>
         <!-- ProcessorWithUserData -->
-        <service id="stuzzo.logger.processor.web.user.data" class="Stuzzo\Bundle\MonologExtenderBundle\Processor\ExtendedWebUserDataProcessor">
+        <service id="stuzzo.logger.processor.web.user.data" class="Stuzzo\Bundle\MonologExtenderBundle\Processor\WebUserDataProcessor">
             <tag name="monolog.processor" channel="request"/>
             <tag name="monolog.processor" channel="app"/>
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
@@ -14,7 +14,7 @@
         </service>
 
         <!-- ProcessorSlackWithUserData -->
-        <service id="stuzzo.logger.processor.slack.user.data" class="Stuzzo\Bundle\MonologExtenderBundle\Processor\SlackProcessor">
+        <service id="stuzzo.logger.processor.slack.user.data" class="Stuzzo\Bundle\MonologExtenderBundle\Processor\SlackUserDataProcessor">
             <tag name="monolog.processor" channel="request"/>
             <tag name="monolog.processor" channel="app"/>
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />

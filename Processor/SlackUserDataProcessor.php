@@ -2,6 +2,7 @@
 
 namespace Stuzzo\Bundle\MonologExtenderBundle\Processor;
 
+use Stuzzo\Monolog\Processor\SlackProcessor;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -12,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @author Alfredo Aiello <stuzzo@gmail.com>
  */
-class SlackProcessor
+class SlackUserDataProcessor extends SlackProcessor
 {
 	/** @var TokenStorage */
 	private $tokenStorage;
@@ -27,29 +28,10 @@ class SlackProcessor
 	
 	public function __invoke(array $record)
 	{
-		foreach ($record['context'] as $key => $val) {
-			if (!($val instanceof \Exception)) {
-				continue;
-			}
-			
-			$record['message'] = sprintf(
-				'Uncaught PHP Exception %s %s at %s line %s',
-				get_class($val),
-				$val->getMessage(),
-				$val->getFile(),
-				$val->getLine()
-			);
-			
-			$record['extra'] = ['Stack Trace' => sprintf(
-				'%s',
-				$val->getTraceAsString()
-			)];
-			
-			unset($record['context'][$key]);
-		}
-		
+		$record = parent::__invoke($record);
+
 		$record = $this->addRequestData($record);
-		
+
 		return $record;
 	}
 	
