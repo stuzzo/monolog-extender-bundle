@@ -11,9 +11,12 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
-        "stuzzo/monolog-extender": "^1.1",
-        "symfony/security": ">=2.8"
+        "php": "^7.0",
+        "stuzzo/monolog-extender": "^2.0",
+        "symfony/dependency-injection": "~4.0",
+        "symfony/config": "~4.0",
+        "symfony/security": "~4.0",
+        "symfony/http-kernel": "~4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.5"
