@@ -5,25 +5,17 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <!-- ProcessorWithUserData -->
-        <service id="stuzzo.logger.processor.web.user.data" class="Stuzzo\Bundle\MonologExtenderBundle\Processor\WebUserDataProcessor">
-            <tag name="monolog.processor" channel="request"/>
-            <tag name="monolog.processor" channel="app"/>
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
-            <argument type="service" id="security.token_storage" />
-        </service>
-
-        <!-- ProcessorSlackWithUserData -->
-        <service id="stuzzo.logger.processor.slack.user.data" class="Stuzzo\Bundle\MonologExtenderBundle\Processor\SlackUserDataProcessor">
-            <tag name="monolog.processor" channel="request"/>
-            <tag name="monolog.processor" channel="app"/>
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
-            <argument type="service" id="security.token_storage" />
-        </service>
 
         <!-- Formatter -->
         <service id="stuzzo.logger.stream.formatter" class="Stuzzo\Monolog\Formatter\StreamFormatter" public="false">
             <argument>TIME: %%datetime%%\nCHANNEL: %%channel%%\nLEVEL: %%level_name%%\nMESSAGE: %%message%%\n%%context.exception%%\n%%request%%\n</argument>
+            <argument>d/m/Y H:i:s</argument>
+            <argument>true</argument>
+            <argument>true</argument>
+        </service>
+
+        <service id="stuzzo.logger.console.formatter" class="Stuzzo\Monolog\Formatter\ConsoleFormatter" public="false">
+            <argument>TIME: %%datetime%%\nCHANNEL: %%channel%%\nLEVEL: %%level_name%%\nMESSAGE: %%message%%\nCOMMAND: %%context.command%%\n%%context.error%%\n\n</argument>
             <argument>d/m/Y H:i:s</argument>
             <argument>true</argument>
             <argument>true</argument>

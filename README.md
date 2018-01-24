@@ -43,10 +43,11 @@ monolog:
             content_type:   text/html
         slackwebhook:
             type:           slackwebhook
-            channel:        %channel%
+            channel:        %channel% # You can use a channel (with #channelName) or a user (with @userName)
             webhook_url:    %hook_url%
             level:          critical
             include_extra:  true
+            formatter:      stuzzo.logger.html.formatter            
 ```
 
 This is an example configuration to use slack and html processors.
@@ -54,17 +55,17 @@ This is an example configuration to use slack and html processors.
 ```yaml
 services:
     app.processor.slack:
-        class: Stuzzo\Monolog\Processor\SlackProcessor
+        class: Stuzzo\Bundle\MonologExtenderBundle\Processor\SlackUserDataProcessor # Add user info and better formatting
         arguments: ["@security.token_storage"]
         tags:
-          - { name: monolog.processor, handler: slackwebhook }
+          - { name: monolog.processor, handler: slackwebhook } # It fires only for slack messages
           - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
     app.processor.web:
-        class: Stuzzo\Bundle\MonologExtenderBundle\Processor\ExtendedWebUserDataProcessor
+        class: Stuzzo\Bundle\MonologExtenderBundle\Processor\WebUserDataProcessor # Add user info and better formatting
         arguments: ["@security.token_storage"]
         tags:
-          - { name: monolog.processor, handler: grouped }
+          - { name: monolog.processor, channel: request } # It fires only for channel request
           - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 ```
 

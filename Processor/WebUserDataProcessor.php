@@ -26,7 +26,7 @@ class WebUserDataProcessor extends ExtendedWebProcessor
     public function __construct(TokenStorage $tokenStorage, $serverData = null, $extraFields = null)
     {
         parent::__construct($serverData, $extraFields);
-        $this->extraFields  = [];
+//        $this->extraFields  = [];
         $this->tokenStorage = $tokenStorage;
     }
     
